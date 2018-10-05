@@ -1,0 +1,70 @@
+version: '3'
+services:
+  consul:
+    image: consul
+    ports:
+      - 8500:8500
+
+  db:
+    image: postgres:9.3
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    environment:
+      POSTGRES_DB: otoy
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: runwols123
+    ports:
+      - 5432:5432
+
+  zookeeper:
+    image: wurstmeister/zookeeper
+    ports:
+      - 2181:2181
+
+  kafka:
+    image: wurstmeister/kafka:0.10.2.1
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_CREATE_TOPICS: "news-topic:1:3,tags-topic:1:1:compact"
+      KAFKA_ADVERTISED_HOST_NAME: 192.168.99.100
+      KAFKA_ADVERTISED_PORT: "9092"
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+      KAFKA_MESSAGE_MAX_BYTES: 200000000
+    ports:
+      - 9092:9092
+
+  ntm:
+    build: .
+    volumes:
+      - .:/go/src/ntm
+    working_dir: /go/src/ntm
+    command: go run main.go
+    restart: always
+    environment:
+      DB_DIALECT: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_NAME: otoy
+      DB_PASSWORD: runwols123
+      DB_SSLMODE: disable
+    depends_on:
+      - consul
+      - zookeeper
+      - kafka
+      - db
+    links:
+      - consul
+      - zookeeper
+      - kafka
+      - db
+    ports:
+      - 8080:8080
+    stdin_open: true
+    tty: true
