@@ -9,31 +9,29 @@ import (
 	"os"
 )
 
-type CreateNewsHandler struct {
+type CreateTopicHandler struct {
 	Promise struct {
 		ID uuid.UUID `json:"id"`
 		Message string `json:"message"`
 	}
 }
 
-func NewCreateNewsHandler(ctx echo.Context) error {
-	h := new(CreateNewsHandler)
+func NewCreateTopicHandler(ctx echo.Context) error {
+	h := new(CreateTopicHandler)
 
 	f := new(struct{
-		Title string `json:"title"`
-		Body string `json:"body"`
-		TopicIds []uuid.UUID `json:"topic_ids"`
+		Name string `json:"name"`
 	})
 
 	if err := ctx.Bind(f); err != nil {
 		return err
 	}
 
-	cmd := command.NewCreateNewsCommand(f.Title, f.Body, f.TopicIds...)
+	cmd := command.NewCreateTopicCommand(f.Name)
 
 	if os.Getenv("ENV") != "testing" {
 		kafka.
-			NewProducer("news-topic", cmd).
+			NewProducer("tags-topic", cmd).
 			Dispatch()
 	}
 
