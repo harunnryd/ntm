@@ -13,7 +13,7 @@ var _ = Describe("DeleteNewsCommand", func() {
 		newsID uuid.UUID
 	)
 
-	Context("when i call DeleteNewsCommand", func() {
+	Context("when i call NewDeleteNewsCommand", func() {
 		BeforeEach(func() {
 			newsID = uuid.Must(uuid.NewV4())
 			deleteNewsCommand = NewDeleteNewsCommand(newsID)

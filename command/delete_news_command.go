@@ -8,8 +8,6 @@ import (
 type DeleteNewsCommand struct {
 	Type string
 	NewsID uuid.UUID
-	Title string
-	Body string
 }
 
 func NewDeleteNewsCommand(newsID uuid.UUID) *DeleteNewsCommand {
