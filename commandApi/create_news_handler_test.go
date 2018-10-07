@@ -25,8 +25,7 @@ var _ = Describe("CreateNewsHandler", func() {
 			req = httptest.NewRequest(echo.POST, "/news", strings.NewReader(`
 				{
 					"title": "gara - gara unyil",
-					"body": "kata si unyil, si paijo adalah kembarannya :(",
-					"topic_ids": ["f8ce2684-d010-4d2f-821e-28513009366a", "fcc97e74-449f-4e17-baa2-db01453d3669"]
+					"body": "kata si unyil, si paijo adalah kembarannya :("
 				}`))
 			req.Header.Set(echo.HeaderAccept, echo.MIMEApplicationJSON)
 			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)

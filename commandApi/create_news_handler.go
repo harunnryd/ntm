@@ -22,14 +22,13 @@ func NewCreateNewsHandler(ctx echo.Context) error {
 	f := new(struct{
 		Title string `json:"title"`
 		Body string `json:"body"`
-		TopicIds []uuid.UUID `json:"topic_ids"`
 	})
 
 	if err := ctx.Bind(f); err != nil {
 		return err
 	}
 
-	cmd := command.NewCreateNewsCommand(f.Title, f.Body, f.TopicIds...)
+	cmd := command.NewCreateNewsCommand(f.Title, f.Body)
 
 	if os.Getenv("ENV") != "testing" {
 		kafka.
