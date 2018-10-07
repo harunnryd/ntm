@@ -3,21 +3,15 @@ package command_test
 import (
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	"github.com/satori/go.uuid"
 	. "ntm/command"
 )
 
 var _ = Describe("CreateNewsCommand", func() {
-	var (
-		createNewsCommand *CreateNewsCommand
-		topicId1 uuid.UUID
-		topicId2 uuid.UUID
-	)
+	var createNewsCommand *CreateNewsCommand
+
 	Context("when i call NewCreateNewsCommand", func() {
 		BeforeEach(func() {
-			topicId1 = uuid.Must(uuid.NewV4())
-			topicId2 = uuid.Must(uuid.NewV4())
-			createNewsCommand = NewCreateNewsCommand("how to maintain car", "i believe, i have car", topicId1, topicId2)
+			createNewsCommand = NewCreateNewsCommand("how to maintain car", "i believe, i have car")
 		})
 
 		It("should fulfill ID", func() {
@@ -34,10 +28,6 @@ var _ = Describe("CreateNewsCommand", func() {
 
 		It("should fulfill Body", func() {
 			Expect(createNewsCommand.Body).To(Equal("i believe, i have car"))
-		})
-
-		It("should contains topicID", func() {
-			Expect(createNewsCommand.TopicIds).To(ContainElement(topicId1))
 		})
 	})
 })

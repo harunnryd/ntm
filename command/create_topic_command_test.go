@@ -7,9 +7,8 @@ import (
 )
 
 var _ = Describe("CreateTopicCommand", func() {
-	var (
-		createTopicCommand *CreateTopicCommand
-	)
+	var createTopicCommand *CreateTopicCommand
+
 	Context("when i call NewCreateTopicCommand", func() {
 		BeforeEach(func() {
 			createTopicCommand = NewCreateTopicCommand("car")

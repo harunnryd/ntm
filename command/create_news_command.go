@@ -10,16 +10,14 @@ type CreateNewsCommand struct {
 	Type string
 	Title string
 	Body string
-	TopicIds []uuid.UUID
 }
 
-func NewCreateNewsCommand(title, body string, topicIds... uuid.UUID) *CreateNewsCommand {
+func NewCreateNewsCommand(title, body string) *CreateNewsCommand {
 	cmd := new(CreateNewsCommand)
 	cmd.ID = uuid.Must(uuid.NewV4())
 	cmd.Type = "CreateNewsCommand"
 	cmd.Title = title
 	cmd.Body = body
-	cmd.TopicIds = topicIds
 	return cmd
 }
 
