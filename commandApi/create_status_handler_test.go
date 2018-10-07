@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var _ = Describe("CreateNewsHandler", func() {
+var _ = Describe("CreateStatusHandler", func() {
 	var (
 		h error
 		e *echo.Echo
@@ -19,19 +19,18 @@ var _ = Describe("CreateNewsHandler", func() {
 		rec *httptest.ResponseRecorder
 	)
 
-	Context("when i call NewCreateNewsHandler", func() {
+	Context("when i call NewCreateStatusHandler", func() {
 		BeforeEach(func() {
 			e = echo.New()
-			req = httptest.NewRequest(echo.POST, "/news", strings.NewReader(`
+			req = httptest.NewRequest(echo.POST, "/statuses", strings.NewReader(`
 				{
-					"title": "gara - gara unyil",
-					"body": "kata si unyil, si paijo adalah kembarannya :("
+					"name": "draft"
 				}`))
 			req.Header.Set(echo.HeaderAccept, echo.MIMEApplicationJSON)
 			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 			rec = httptest.NewRecorder()
 			c = e.NewContext(req, rec)
-			h = NewCreateNewsHandler(c)
+			h = NewCreateStatusHandler(c)
 		})
 
 		It("should no error", func() {

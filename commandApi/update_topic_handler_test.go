@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-var _ = Describe("CreateNewsHandler", func() {
+var _ = Describe("UpdateTopicHandler", func() {
 	var (
 		h error
 		e *echo.Echo
@@ -19,27 +19,31 @@ var _ = Describe("CreateNewsHandler", func() {
 		rec *httptest.ResponseRecorder
 	)
 
-	Context("when i call NewCreateNewsHandler", func() {
+	Context("when i call NewUpdateTopicHandler", func() {
 		BeforeEach(func() {
 			e = echo.New()
-			req = httptest.NewRequest(echo.POST, "/news", strings.NewReader(`
+			req = httptest.NewRequest(echo.PATCH, "/", strings.NewReader(`
 				{
-					"title": "gara - gara unyil",
-					"body": "kata si unyil, si paijo adalah kembarannya :("
+					"name": "klitik geli geli"
 				}`))
 			req.Header.Set(echo.HeaderAccept, echo.MIMEApplicationJSON)
 			req.Header.Set(echo.HeaderContentType, echo.MIMEApplicationJSON)
 			rec = httptest.NewRecorder()
 			c = e.NewContext(req, rec)
-			h = NewCreateNewsHandler(c)
+
+			c.SetPath("/topics/:topic_id")
+			c.SetParamNames("topic_id")
+			c.SetParamValues("a6ce6a11-7eea-4490-837b-5b6af31aebe1")
+
+			h = NewUpdateTopicHandler(c)
 		})
 
 		It("should no error", func() {
 			Expect(h).To(BeNil())
 		})
 
-		It("should response http status created", func() {
-			Expect(rec.Code).To(Equal(http.StatusCreated))
+		It("should response http status accepted", func() {
+			Expect(rec.Code).To(Equal(http.StatusAccepted))
 		})
 
 		It("should response json", func() {
