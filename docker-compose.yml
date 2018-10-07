@@ -47,6 +47,7 @@ services:
     command: go run main.go
     restart: always
     environment:
+      ENV: development
       DB_DIALECT: postgres
       DB_HOST: db
       DB_PORT: 5432
