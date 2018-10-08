@@ -3,6 +3,60 @@
 	"ignore": "test",
 	"package": [
 		{
+			"checksumSHA1": "yXtOJHAG7Lc9yxnm5VUTs6h3z2c=",
+			"path": "github.com/DataDog/zstd",
+			"revision": "2bf71ec4836011b92dc78df3b9ace6b40e65f7df",
+			"revisionTime": "2016-07-06T22:07:25Z"
+		},
+		{
+			"checksumSHA1": "cztBjKMYginFa6dsAHlcPp8SteE=",
+			"path": "github.com/Shopify/sarama",
+			"revision": "f21e149e5948e9c9b9034f1a19f430d62e00c4d3",
+			"revisionTime": "2018-10-03T07:13:06Z"
+		},
+		{
+			"checksumSHA1": "IqYcdvjMo6v8TyxgDMGKeXerru0=",
+			"path": "github.com/asaskevich/govalidator",
+			"revision": "f9ffefc3facfbe0caee3fea233cbb6e8208f4541",
+			"revisionTime": "2018-07-20T11:50:03Z"
+		},
+		{
+			"checksumSHA1": "oK7boC8E6ElKwxcTY4dBZV0sFR4=",
+			"path": "github.com/bsm/sarama-cluster",
+			"revision": "f7d869db45fd8d74bf62c02a9d17637f945668d0",
+			"revisionTime": "2018-09-18T12:35:12Z"
+		},
+		{
+			"checksumSHA1": "aENNVxKxF9h9PfvTIstiAS5I3Lg=",
+			"path": "github.com/davecgh/go-spew/spew",
+			"revision": "d8f796af33cc11cb798c1aaeb27a4ebc5099927d",
+			"revisionTime": "2018-08-30T19:11:22Z"
+		},
+		{
+			"checksumSHA1": "o0psFRtB8EoelTAEhJSqrtXdwJY=",
+			"path": "github.com/eapache/go-resiliency/breaker",
+			"revision": "ea41b0fad31007accc7f806884dcdf3da98b79ce",
+			"revisionTime": "2018-03-26T13:24:23Z"
+		},
+		{
+			"checksumSHA1": "4X8AHXOou+1mBPRxjUyU7jyu8vQ=",
+			"path": "github.com/eapache/go-xerial-snappy",
+			"revision": "776d5712da21bc4762676d614db1d8a64f4238b0",
+			"revisionTime": "2018-08-14T17:44:37Z"
+		},
+		{
+			"checksumSHA1": "Or1sHBLnbwlI+dfW/Io0CF0bkok=",
+			"path": "github.com/eapache/queue",
+			"revision": "093482f3f8ce946c05bcba64badd2c82369e084d",
+			"revisionTime": "2018-02-27T14:14:24Z"
+		},
+		{
+			"checksumSHA1": "iDAyJMnswBRktzVlZSg7qdI5+A8=",
+			"path": "github.com/golang/snappy",
+			"revision": "2e65f85255dbc3072edf28d6b5b8efc472979f5a",
+			"revisionTime": "2018-05-18T05:39:59Z"
+		},
+		{
 			"checksumSHA1": "qaQCNzcryTODq36tlUYJWCnZmUA=",
 			"path": "github.com/jinzhu/gorm",
 			"revision": "f6260a00852946a10a57e8bb9f505f19bc9389b7",
@@ -69,6 +123,24 @@
 			"revisionTime": "2018-08-30T10:17:45Z"
 		},
 		{
+			"checksumSHA1": "bNJXc4/k4USCJ/dwmfdUpGXhfqw=",
+			"path": "github.com/pierrec/lz4",
+			"revision": "635575b42742856941dbc767b44905bb9ba083f6",
+			"revisionTime": "2018-10-05T16:47:09Z"
+		},
+		{
+			"checksumSHA1": "etLdFWBndH4iRSW+BN2W0pVzulE=",
+			"path": "github.com/pierrec/lz4/internal/xxh32",
+			"revision": "635575b42742856941dbc767b44905bb9ba083f6",
+			"revisionTime": "2018-10-05T16:47:09Z"
+		},
+		{
+			"checksumSHA1": "T+faEW56/tpzBwwQ6OCChvQsJbQ=",
+			"path": "github.com/rcrowley/go-metrics",
+			"revision": "e2704e165165ec55d062f5919b4b29494e9fa790",
+			"revisionTime": "2018-05-03T17:46:38Z"
+		},
+		{
 			"checksumSHA1": "+RPbt/bqx8qmTbdc2bL0cjCbVNg=",
 			"path": "github.com/satori/go.uuid",
 			"revision": "36e9d2ebbde5e3f13ab2e25625fd453271d6522e",
@@ -97,6 +169,12 @@
 			"path": "golang.org/x/crypto/acme/autocert",
 			"revision": "e3636079e1a4c1f337f212cc5cd2aca108f6c900",
 			"revisionTime": "2018-09-26T22:24:25Z"
+		},
+		{
+			"checksumSHA1": "xwhqe/igHQrY3IhqDwzo6j7qpm8=",
+			"path": "golang.org/x/net/html/atom",
+			"revision": "146acd28ed5894421fb5aac80ca93bc1b1f46f87",
+			"revisionTime": "2018-10-04T22:16:49Z"
 		},
 		{
 			"checksumSHA1": "ko2jS+S73n4qhQpABo/AnQaSQfo=",
