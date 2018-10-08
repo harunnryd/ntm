@@ -7,47 +7,40 @@ import (
 	"ntm/model"
 )
 
-type TopicRepoInterface interface {
-	create(interface{}) error
-	update(uuid.UUID, interface{}) error
-	delete(uuid.UUID) error
-	softDelete(uuid.UUID) error
+type GormTopicRepo struct {}
+
+func NewGormTopicRepo() *GormTopicRepo {
+	return new(GormTopicRepo)
 }
 
-type BaseTopicRepo struct {}
-
-func NewBaseTopicRepo() *BaseTopicRepo {
-	return new(BaseTopicRepo)
+func (b *GormTopicRepo) orm() *gorm.DB {
+	return db.NewORM().Connect().LogMode(true)
 }
 
-func (b *BaseTopicRepo) orm() *gorm.DB {
-	return db.NewORM().Connect()
-}
-
-func (b *BaseTopicRepo) create(v interface{}) error {
+func (b *GormTopicRepo) create(v interface{}) error {
 	return b.orm().Model(model.NewTopic()).Create(v).Error
 }
 
-func (b *BaseTopicRepo) update(id uuid.UUID, v interface{}) error {
+func (b *GormTopicRepo) update(id uuid.UUID, v interface{}) error {
 	return b.orm().Model(model.NewTopic()).Where("id = ?", id).Update(v).Error
 }
 
-func (b *BaseTopicRepo) delete(id uuid.UUID) error {
+func (b *GormTopicRepo) delete(id uuid.UUID) error {
 	return b.orm().Model(model.NewTopic()).Unscoped().Where("id = ?", id).Delete(model.NewTopic()).Error
 }
 
-func (b *BaseTopicRepo) softDelete(id uuid.UUID) error {
+func (b *GormTopicRepo) softDelete(id uuid.UUID) error {
 	return b.orm().Model(model.NewTopic()).Where("id = ?", id).Delete(model.NewTopic()).Error
 }
 
-type TopicRepo struct { use TopicRepoInterface }
+type TopicRepo struct { use Repo }
 
 func NewTopicRepo() *TopicRepo {
-	return &TopicRepo{use: NewBaseTopicRepo()}
+	return &TopicRepo{use: NewGormTopicRepo()}
 }
 
 func (t *TopicRepo) ORM() *gorm.DB {
-	return t.use.(*BaseTopicRepo).orm()
+	return t.use.(*GormTopicRepo).orm()
 }
 
 func (t *TopicRepo) Create(v interface{}) error {
