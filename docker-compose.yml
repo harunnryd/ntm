@@ -39,15 +39,16 @@ services:
     ports:
       - 9092:9092
 
-  ntm:
+  worker:
     build: .
     volumes:
-      - .:/go/src/ntm
+    - .:/go/src/ntm
     working_dir: /go/src/ntm
-    command: go run main.go
+    command: go run main.go --act=consumer
     restart: always
     environment:
       ENV: development
+      KAFKA_HOST: kafka:9092
       DB_DIALECT: postgres
       DB_HOST: db
       DB_PORT: 5432
@@ -56,16 +57,48 @@ services:
       DB_PASSWORD: runwols123
       DB_SSLMODE: disable
     depends_on:
-      - consul
-      - zookeeper
-      - kafka
-      - db
+    - consul
+    - zookeeper
+    - kafka
+    - db
     links:
-      - consul
-      - zookeeper
-      - kafka
-      - db
+    - consul
+    - zookeeper
+    - kafka
+    - db
+    stdin_open: true
+    tty: true
+
+  ntm:
+    build: .
+    volumes:
+    - .:/go/src/ntm
+    working_dir: /go/src/ntm
+    command: >
+      bash -c "go run main.go --act=migrate && go run main.go --act=rest && go run main.go --act=consumer"
+    restart: always
+    environment:
+      ENV: development
+      KAFKA_HOST: kafka:9092
+      DB_DIALECT: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_NAME: otoy
+      DB_PASSWORD: runwols123
+      DB_SSLMODE: disable
+    depends_on:
+    - consul
+    - zookeeper
+    - kafka
+    - db
+    - worker
+    links:
+    - consul
+    - zookeeper
+    - kafka
+    - db
     ports:
-      - 8080:8080
+    - 8080:8080
     stdin_open: true
     tty: true
