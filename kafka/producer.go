@@ -29,7 +29,7 @@ func (p *Producer) config() *sarama.Config {
 }
 
 func (p *Producer) connect() sarama.SyncProducer {
-	prod, err := sarama.NewSyncProducer([]string{"kafka:9092"}, p.config())
+	prod, err := sarama.NewSyncProducer([]string{os.Getenv("KAFKA_HOST")}, p.config())
 	if err != nil {
 		fmt.Printf("Producer err: %s\n", err)
 		os.Exit(-1)
@@ -50,7 +50,7 @@ func (p *Producer) Dispatch() {
 	msg := new(sarama.ProducerMessage)
 
 	msg.Topic = p.Topic
-	msg.Key = sarama.StringEncoder(reflect.TypeOf(p.Command).Name())
+	msg.Key = sarama.StringEncoder(fmt.Sprint(reflect.TypeOf(p.Command).Elem().Name()))
 	msg.Value = sarama.StringEncoder(v)
 
 	partition, offset, err := prod.SendMessage(msg)
@@ -58,6 +58,6 @@ func (p *Producer) Dispatch() {
 		fmt.Printf("Producer err: %s\n", err)
 	} else {
 		fmt.Printf("Message: %+v\n", p.Command)
-		fmt.Printf("Message stored in partition: %d, offset: %d\n", partition, offset)
+		fmt.Printf("Message stored in key: %s, partition: %d, offset: %d\n", reflect.TypeOf(p.Command).Elem().Name(), partition, offset)
 	}
 }
