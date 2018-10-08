@@ -1,7 +1,6 @@
 package command
 
 import (
-	"fmt"
 	"github.com/satori/go.uuid"
 )
 
@@ -15,9 +14,4 @@ func NewDeleteNewsCommand(newsID uuid.UUID) *DeleteNewsCommand {
 	cmd.Type = "DeleteNewsCommand"
 	cmd.NewsID = newsID
 	return cmd
-}
-
-func (cmd *DeleteNewsCommand) Process() error {
-	fmt.Printf("process: %+v\n", cmd)
-	return nil
 }

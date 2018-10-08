@@ -1,7 +1,6 @@
 package command
 
 import (
-	"fmt"
 	"github.com/satori/go.uuid"
 )
 
@@ -15,9 +14,4 @@ func NewDeleteStatusCommand(statusID uuid.UUID) *DeleteStatusCommand {
 	cmd.Type = "DeleteStatusCommand"
 	cmd.StatusID = statusID
 	return cmd
-}
-
-func (cmd *DeleteStatusCommand) Process() error {
-	fmt.Printf("process: %+v\n", cmd)
-	return nil
 }

@@ -1,7 +1,6 @@
 package command
 
 import (
-	"fmt"
 	"github.com/satori/go.uuid"
 )
 
@@ -17,9 +16,4 @@ func NewUpdateStatusCommand(statusID uuid.UUID,  name string) *UpdateStatusComma
 	cmd.StatusID = statusID
 	cmd.Name = name
 	return cmd
-}
-
-func (cmd *UpdateStatusCommand) Process() error {
-	fmt.Printf("process: %+v\n", cmd)
-	return nil
 }

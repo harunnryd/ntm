@@ -1,7 +1,6 @@
 package command
 
 import (
-	"fmt"
 	"github.com/satori/go.uuid"
 )
 
@@ -19,9 +18,4 @@ func NewCreateNewsCommand(title, body string) *CreateNewsCommand {
 	cmd.Title = title
 	cmd.Body = body
 	return cmd
-}
-
-func (cmd *CreateNewsCommand) Process() error {
-	fmt.Printf("process: %+v\n", cmd)
-	return nil
 }

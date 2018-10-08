@@ -17,7 +17,3 @@ func NewChangeNewsStatusCommand(newsID uuid.UUID, statusID uuid.UUID) *ChangeNew
 	cmd.StatusID = statusID
 	return cmd
 }
-
-func (cmd *ChangeNewsStatusCommand) Process() error {
-	return nil
-}

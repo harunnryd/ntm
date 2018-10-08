@@ -11,20 +11,14 @@ var _ = Describe("UnAssignTopicCommand", func() {
 	var (
 		unAssignTopicCommand *UnAssignTopicCommand
 		newsID uuid.UUID
-		topicId1 uuid.UUID
-		topicId2 uuid.UUID
+		topicID uuid.UUID
 	)
 
 	Context("when i call NewUnAssignTopicCommand", func() {
 		BeforeEach(func() {
 			newsID = uuid.Must(uuid.NewV4())
-			topicId1 = uuid.Must(uuid.NewV4())
-			topicId2 = uuid.Must(uuid.NewV4())
-			unAssignTopicCommand = NewUnAssignTopicCommand(newsID, topicId1, topicId2)
-		})
-
-		It("should fulfill ID", func() {
-			Expect(unAssignTopicCommand.ID).NotTo(BeNil())
+			topicID = uuid.Must(uuid.NewV4())
+			unAssignTopicCommand = NewUnAssignTopicCommand(newsID, topicID)
 		})
 
 		It("should fulfill Type", func() {
@@ -36,7 +30,7 @@ var _ = Describe("UnAssignTopicCommand", func() {
 		})
 
 		It("should contains TopicIds", func() {
-			Expect(unAssignTopicCommand.TopicIds).To(ContainElement(topicId1))
+			Expect(unAssignTopicCommand.TopicID).To(Equal(topicID))
 		})
 	})
 })

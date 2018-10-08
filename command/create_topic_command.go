@@ -15,7 +15,3 @@ func NewCreateTopicCommand(name string) *CreateTopicCommand {
 	cmd.Name = name
 	return cmd
 }
-
-func (cmd *CreateTopicCommand) Process() error {
-	return nil
-}
