@@ -13,7 +13,7 @@ type DeleteStatusHandler struct {
 	Promise struct {
 		ID uuid.UUID `json:"id"`
 		Message string `json:"message"`
-	}
+	} `json:"promise"`
 }
 
 func NewDeleteStatusHandler(ctx echo.Context) error {

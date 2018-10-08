@@ -5,26 +5,24 @@ import (
 	"github.com/labstack/echo"
 	"github.com/satori/go.uuid"
 	"net/http"
-	"ntm/kafka"
 	"ntm/command"
+	"ntm/kafka"
 	"os"
 )
 
-type UpdateTopicHandler struct {
+type UnAssignTopicHandler struct {
 	Promise struct {
 		ID uuid.UUID `json:"id"`
 		Message string `json:"message"`
 	} `json:"promise"`
 }
 
-func NewUpdateTopicHandler(ctx echo.Context) error {
-	h := new(UpdateTopicHandler)
+func NewUnAssignTopicHandler(ctx echo.Context) error {
+	h := new(CreateNewsHandler)
 
 	f := new(struct{
-		Name string `json:"name" valid:"required"`
+		TopicID uuid.UUID `json:"topic_id" valid:"required"`
 	})
-
-	topicID := uuid.FromStringOrNil(ctx.Param("topic_id"))
 
 	if err := ctx.Bind(f); err != nil {
 		return err
@@ -37,15 +35,17 @@ func NewUpdateTopicHandler(ctx echo.Context) error {
 	}
 
 
-	cmd := command.NewUpdateTopicCommand(topicID, f.Name)
+	newsID := uuid.FromStringOrNil(ctx.Param("news_id"))
+
+	cmd := command.NewUnAssignTopicCommand(newsID, f.TopicID)
 
 	if os.Getenv("ENV") != "testing" {
 		kafka.
-			NewProducer("tags-topic", cmd).
+			NewProducer("news-topic", cmd).
 			Dispatch()
 	}
 
-	h.Promise.ID = cmd.TopicID
+	h.Promise.ID = cmd.NewsID
 	h.Promise.Message = "success!"
 
 	return ctx.JSON(http.StatusAccepted, h)

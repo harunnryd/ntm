@@ -13,7 +13,7 @@ type DeleteNewsHandler struct {
 	Promise struct {
 		ID uuid.UUID `json:"id"`
 		Message string `json:"message"`
-	}
+	} `json:"promise"`
 }
 
 func NewDeleteNewsHandler(ctx echo.Context) error {
