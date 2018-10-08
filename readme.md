@@ -34,10 +34,14 @@ You can change the host to match docker-machine ip :)
 
 [Postman Documentation API Click here . . .](https://documenter.getpostman.com/view/5287012/RWgnZ1Hh "Postman Documentation API")
 
-[![Postman](https://image.ibb.co/fEXozU/rest.png "Postman")
+[![Postman](https://image.ibb.co/fEXozU/rest.png "Postman")](https://image.ibb.co/fEXozU/rest.png "Postman")
 
-[![Terminal](https://image.ibb.co/iDmFeU/consumer.png "Terminal")
+[![Terminal](https://image.ibb.co/iDmFeU/consumer.png "Terminal")](https://image.ibb.co/iDmFeU/consumer.png "Terminal")
 
 ### ERD
 
 [![ERD](https://image.ibb.co/fpAcR9/xasd.png "ERD")](https://image.ibb.co/fpAcR9/xasd.png "ERD")
+
+### License
+
+> Gateid is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
